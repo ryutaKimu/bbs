@@ -24,7 +24,7 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-button,.toRegister{
+button, .toRegister {
     display: block;
     width: 100%;
     padding: 10px;
@@ -36,24 +36,39 @@ button,.toRegister{
     cursor: pointer;
 }
 
-.toRegister{
-    position:  absolute;
-    width: 5%;
+.toRegister {
+    position: absolute;
+    width: auto;
     top: 4%;
-    right: 20%;
+    right: 5%;
     text-decoration: none;
 }
 
-button:hover,.toRegister:hover {
+button:hover, .toRegister:hover {
     background-color: #0056b3;
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
-.error-message{
+.error-message {
     color: #ff0000;
     font-size: 14px;
 }
 
+/* レスポンシブデザイン */
+@media (max-width: 600px) {
+    .login-container {
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .toRegister {
+        position: static;
+        margin: 20px auto;
+        display: block;
+        width: 20%;
+        text-align: center;
+    }
+}

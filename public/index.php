@@ -17,7 +17,7 @@ dbConnect();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -28,13 +28,13 @@ dbConnect();
 
 <body>
     <header>
-        <h1>掲示板</h1>
+    <?php include '../templates/header.php'; ?>
         <hr />
         <p>ようこそ、<?php echo $username ?>さん</p>
     </header>
     <main>
         <section class="board">
-            <a href="public/create_thread.php" class="newThreadLink">新規スレッド作成</a> <!-- 新規スレッド作成ページへのリンク -->
+            <a href="makeThread.php" class="newThreadLink">新規スレッド作成</a> <!-- 新規スレッド作成ページへのリンク -->
             <ul>
                 <li>
                     <h2><a href="#">ダミースレッド1</a></h2>

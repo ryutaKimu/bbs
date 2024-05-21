@@ -48,9 +48,41 @@ p {
     color: #333;
     font-weight: bold; /* リンクを太字にする */
     text-align: left;
-    top: 19%;
+    top: 16%;
 }
 
 a:hover {
     color: #666;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1000px) {
+    .board {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .newThreadLink {
+        position: static;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 600px) {
+    .board {
+        padding: 10px;
+    }
+
+    li {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
 }

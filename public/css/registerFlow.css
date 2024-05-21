@@ -50,3 +50,32 @@ h1{
     font-size: 14px;
 }
 
+dl {
+    text-align: left;
+}
+
+dt {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+dd {
+    margin-bottom: 20px;
+}
+
+
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}

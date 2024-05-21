@@ -8,21 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $fields = ['username', "password"];
     $form = getFilteringPostData($fields);
 
-    $hashPassword = password_hash($form['password'], PASSWORD_DEFAULT);
-
-    $dbc = dbConnect();
-    $query = "INSERT INTO users(username,password)VALUES(:username,:password)";
-    $stmt = $dbc->prepare($query);
-    $stmt->bindParam(':username', $form['username'], PDO::PARAM_STR);
-    $stmt->bindParam(':password', $hashPassword, PDO::PARAM_STR);
-    $success = $stmt->execute();
-
-    if ($success) {
-        $_SESSION['form']['username'] = $form['username'];
+    $validateResult = validate($form['username'],$form['password']);
+    if($validateResult != "blank"){
+        $_SESSION['form'] = $form;
         header('Location:check.php');
         exit();
-    } else {
-        echo "登録に失敗しました。";
     }
 }
 
@@ -30,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/registerFlow.css">
     <title>Document</title>
 </head>
 
@@ -54,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </div>
 
                 <div class="form-group">
-                    <label>password:</label>
+                    <label>パスワード:</label>
                     <input type="password" name="password" value="">
                 </div>
                 <button type="submit" name="submit">登録画面へ進む</button>
