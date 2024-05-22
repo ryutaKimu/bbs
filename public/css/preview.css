@@ -1,0 +1,41 @@
+/* スレッドプレビュー */
+.thread-preview {
+    margin: 0 auto;
+    margin-top: 4%;
+    padding: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 1000px;
+  }
+
+  h1{
+    text-align: center;
+  }
+  
+  .thread-preview h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .thread-preview p {
+    line-height: 1.6;
+  }
+
+  .time{
+    color: #ccc;
+    font-size: 0.8rem;
+  }
+  
+  button {
+    display: block;
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}

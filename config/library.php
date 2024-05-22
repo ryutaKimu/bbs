@@ -28,13 +28,13 @@ function authenticateUser($form)
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$user) {
+    if ( !$user ||$form['username'] !== $user['username'] || !password_verify($form['password'], $user['password'])) {
         return "missMatch";
     }
-    if ($form['username'] !== $user['username'] || !password_verify($form['password'], $user['password'])) {
-        return "missMatch";
-    }
-    return true;
+
+    var_dump($user);
+
+    return $user;
 }
 
 

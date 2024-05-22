@@ -2,11 +2,16 @@
 session_start();
 require('../config/library.php');
 
+if(isset($_SESSION['user'])){
+    $username = $_SESSION['user']['username'];
+    $id = $_SESSION['user']['id'];
+}
+
+
 $form = [
     'title' => "",
-    'content' => ""
+    'content' => "",
 ];
-
 $error = [];
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -22,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $form = $postData;
         if(empty($error)){
             $_SESSION['form'] = $form;
+            $username = $_SESSION['user']['username'];
+            $id = $_SESSION['user']['id'];
             header(('Location:CreateThreadCheck.php'));
             exit();
         }

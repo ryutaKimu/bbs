@@ -3,13 +3,16 @@ require("../config/library.php");
 session_start();
 
 
-if (!empty($_SESSION['form']['username'])) {
+if (!empty($_SESSION['form'])) {
     $username = $_SESSION['form']['username'];
+    $id = $_SESSION['form']['id'];
+    var_dump($id);
 } else {
     header('Location:login.php');
     exit();
 }
 
+$_SESSION['user'] = ['username' => $username, 'id' => $id];
 
 dbConnect();
 
