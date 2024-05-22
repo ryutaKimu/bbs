@@ -2,19 +2,29 @@
 require("../config/library.php");
 session_start();
 
+$username = $_SESSION['form']['username'];
+$id = $_SESSION['form']['id'];
 
-if (!empty($_SESSION['form'])) {
-    $username = $_SESSION['form']['username'];
-    $id = $_SESSION['form']['id'];
-    var_dump($id);
-} else {
+if($username === null || $id === null){
+    header('Location:login.php');
+}
+
+
+if (isset($username) && empty($username) && isset($id) && empty($id)){
     header('Location:login.php');
     exit();
 }
 
-$_SESSION['user'] = ['username' => $username, 'id' => $id];
 
-dbConnect();
+
+
+$dbh = dbConnect();
+$selectQuery = "select t.id,t.title,t.created_at,p.content,p.image_path,u.username
+from threads t inner join posts p on t.id = p.thread_id inner join users u on t.user_id = u.id order by t.id desc";
+$stmt = $dbh->prepare($selectQuery);
+$stmt->execute();
+$results = $stmt->fetchAll();
+
 
 
 ?>
@@ -31,7 +41,7 @@ dbConnect();
 
 <body>
     <header>
-    <?php include '../templates/header.php'; ?>
+        <?php include '../templates/header.php'; ?>
         <hr />
         <p>ようこそ、<?php echo $username ?>さん</p>
     </header>
@@ -39,31 +49,14 @@ dbConnect();
         <section class="board">
             <a href="makeThread.php" class="newThreadLink">新規スレッド作成</a> <!-- 新規スレッド作成ページへのリンク -->
             <ul>
-                <li>
-                    <h2><a href="#">ダミースレッド1</a></h2>
-                    <p>このスレッドはダミーです。実際の投稿はありません。</p>
-                    <p>作成日時: 2024-05-20</p>
-                </li>
-                <li>
-                    <h2><a href="#">ダミースレッド2</a></h2>
-                    <p>このスレッドもダミーです。投稿内容はありません。</p>
-                    <p>作成日時: 2024-05-19</p>
-                </li>
-                <li>
-                    <h2><a href="#">ダミースレッド2</a></h2>
-                    <p>このスレッドもダミーです。投稿内容はありません。</p>
-                    <p>作成日時: 2024-05-19</p>
-                </li>
-                <li>
-                    <h2><a href="#">ダミースレッド2</a></h2>
-                    <p>このスレッドもダミーです。投稿内容はありません。</p>
-                    <p>作成日時: 2024-05-19</p>
-                </li>
-                <li>
-                    <h2><a href="#">ダミースレッド2</a></h2>
-                    <p>このスレッドもダミーです。投稿内容はありません。</p>
-                    <p>作成日時: 2024-05-19</p>
-                </li>
+                <?php foreach ($results as $result) : ?>
+                    <li>
+                        <h2><a href="#"><?php echo $result['title']; ?></a></h2>
+                        <!--substrを使うと中途半端な文字を切り取るので、文字化けを起こす -->
+                        <p class="content"><?php echo mb_substr($result['content'], 0, 90); ?></p>
+                        <p>作成日時: <?php echo $result['created_at']; ?></p>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </section>
     </main>

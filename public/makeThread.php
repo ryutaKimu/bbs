@@ -2,53 +2,51 @@
 session_start();
 require('../config/library.php');
 
-if(isset($_SESSION['user'])){
-    $username = $_SESSION['user']['username'];
-    $id = $_SESSION['user']['id'];
+// セッションからユーザー情報を取得
+if(isset($_SESSION['form'])){
+    $username = $_SESSION['form']['username'];
+    $id = $_SESSION['form']['id'];
+}else{
+    header('Location:index.php');
+    exit();
 }
 
-
+// フォームのデフォルト値
 $form = [
     'title' => "",
     'content' => "",
 ];
 $error = [];
 
+// フォームが送信された場合
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    // フォームデータを取得
     $fields = ['title', 'content'];
     $postData = getFilteringPostData($fields);
 
-    // タイトルと内容のバリデーション
+    // バリデーションチェック
     if (validate($postData['title']) === "blank" || validate($postData['content']) === "blank") {
         $error['post'] = "blank";
     } else {
-        // バリデーション成功時の処理
-        // ここでデータベースにスレッドを保存するなどの処理を行います
+        // エラーがない場合、フォームデータをセッションに保存してリダイレクト
         $form = $postData;
-        if(empty($error)){
-            $_SESSION['form'] = $form;
-            $username = $_SESSION['user']['username'];
-            $id = $_SESSION['user']['id'];
-            header(('Location:CreateThreadCheck.php'));
-            exit();
-        }
-        
+        $_SESSION['form'] = $form;
+        $_SESSION['form']['username'] = $username;
+        $_SESSION['form']['id'] = $id;
+        header(('Location:CreateThreadCheck.php'));
+        exit();
     }
-
-    
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/thread.css">
     <title>スレッド作成</title>
 </head>
-
 <body>
     <?php include '../templates/header.php'; ?>
     <div class="threadContainer">
@@ -59,17 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <?php endif; ?>
             <div class="title-control">
                 <label>タイトル:</label>
-                <input type="text" name="title" value="<?php if (isset($form['title'])) echo hsc($form['title']); ?>">
+                <input type="text" name="title" value="<?php echo isset($form['title']) ? hsc($form['title']) : ''; ?>">
             </div>
-
             <div class="content-control">
                 <label>内容:</label>
-                <textarea name="content" class="textArea" cols="30" rows="10"><?php if (isset($form['content'])) echo hsc($form['content']); ?></textarea>
+                <textarea name="content" class="textArea" cols="30" rows="10"><?php echo isset($form['content']) ? hsc($form['content']) : ''; ?></textarea>
             </div>
-
             <button type="submit">作成</button>
         </form>
     </div>
 </body>
-
 </html>

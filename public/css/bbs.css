@@ -1,88 +1,107 @@
 /* リセットと全般のスタイル */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
 }
 
 body {
-    font-family: Arial, sans-serif; /* フォントを指定 */
-    background-color: #f8f8f8; /* 背景色を設定 */
-    text-align: center;
+  font-family: Arial, sans-serif; /* フォントを指定 */
+  background-color: #f8f8f8; /* 背景色を設定 */
+  text-align: center;
 }
 
 .board {
-    max-width: 1000px; /* ボードの最大幅を設定 */
-    margin: 0 auto; /* ページ中央に配置 */
-    background-color: #fff; /* ボードの背景色を設定 */
-    border: 1px solid #ccc; /* ボーダーを追加 */
-    border-radius: 5px; /* 角丸を追加 */
-    padding: 40px;
-    margin-top: 50px; /* 上部の余白を設定 */
+  max-width: 1000px; /* ボードの最大幅を設定 */
+  margin: 0 auto; /* ページ中央に配置 */
+  background-color: #fff; /* ボードの背景色を設定 */
+  border: 1px solid #ccc; /* ボーダーを追加 */
+  border-radius: 5px; /* 角丸を追加 */
+  padding: 40px;
+  margin-top: 50px; /* 上部の余白を設定 */
 }
 
 /* スレッド一覧のスタイル */
 ul {
-    padding: 0;
+  padding: 0;
+  margin: 0;
 }
 
 li {
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 h2 {
-    margin-top: 0;
-    margin-bottom: 10px; /* タイトルの下部に余白を追加 */
+  margin-bottom: 20px;
 }
 
-p {
-    margin-bottom: 10px;
+h2 a {
+  color: #333; /* タイトルのテキスト色を設定 */
+  text-decoration: none; /* 下線を削除 */
+  font-weight: bold; /* 太字にする */
+}
+
+p{
+    margin-bottom: 14px;
+}
+
+
+p.content {
+  color: #666;
+  line-height: 1.5; 
+}
+
+p.create {
+  color: #999; /* 日時のテキスト色を設定 */
+  font-size: 0.8em; /* フォントサイズを小さくする */
+  margin-bottom: 10px;
 }
 
 .newThreadLink {
-    position: absolute;
-    display: block;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold; /* リンクを太字にする */
-    text-align: left;
-    top: 16%;
+  position: absolute;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold; /* リンクを太字にする */
+  text-align: left;
+  top: 16%;
 }
 
 a:hover {
-    color: #666;
+  color: #666;
 }
 
 /* レスポンシブデザイン */
 @media (max-width: 1000px) {
-    .board {
-        max-width: 90%;
-        padding: 20px;
-    }
+  .board {
+    max-width: 90%;
+    padding: 20px;
+  }
 
-    .newThreadLink {
-        position: static;
-        margin-bottom: 20px;
-        display: inline-block;
-    }
+  .newThreadLink {
+    position: static;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
 }
 
 @media (max-width: 600px) {
-    .board {
-        padding: 10px;
-    }
+  .board {
+    padding: 10px;
+  }
 
-    li {
-        padding: 15px;
-    }
+  li {
+    padding: 15px;
+  }
 
-    h2 {
-        font-size: 1.5em;
-    }
+  h2 {
+    font-size: 1.5em;
+  }
 
-    p {
-        font-size: 1em;
-    }
+  p {
+    font-size: 1em;
+  }
 }
