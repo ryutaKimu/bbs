@@ -2,22 +2,34 @@
 session_start();
 require("../config/library.php");
 
-$fields = ['username', "password"];
-$form = getFilteringPostData($fields);
+
+$form = [
+    'username' => "",
+    'password' => ""
+];
+
+$error = [];
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $fields = ['username', "password"];
+    $postData = getFilteringPostData($fields);
 
-    $authenticationResult = authenticateUser($form);
-    if ($authenticationResult === "missMatch") {
+    $authenticationResult = authenticateUser($postData);
+
+    if (validate($postData['username']) === "blank" || validate($postData['password']) === "blank") {
+        $error['login'] = 'blank';
+    } elseif ($authenticationResult === "missMatch") {
         $error['login'] = "missMatch";
     }
 
     // 認証成功の場合はセッションを設定し、リダイレクト
     if ($authenticationResult === true) {
-        $_SESSION['form']['username'] = $form['username'];
+        $_SESSION['form']['username'] = $postData['username'];
         header('Location:index.php');
         exit(); // リダイレクト後にスクリプトを停止するために exit() を使用
     }
+
+    $form = $postData;
 }
 ?>
 
@@ -42,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <h1>ログイン</h1>
         <form action="login.php" method="post">
 
-            <?php if ((isset($form['username']) && validate($form['username']) === 'blank') || (isset($form['password']) && validate($form['password']) === 'blank')) : ?>
+            <?php if (isset($error['login']) && $error['login'] === 'blank') : ?>
                 <p class="error-message">ユーザー名とパスワードは必須です</p>
             <?php endif; ?>
 

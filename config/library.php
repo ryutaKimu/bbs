@@ -48,12 +48,13 @@ function hsc($value)
 
 function getFilteringPostData($fields)
 {
-    return filter_input_array(INPUT_POST, array_fill_keys($fields, FILTER_DEFAULT));
+    $data = filter_input_array(INPUT_POST, array_fill_keys($fields, FILTER_DEFAULT));
+    return $data !== null ?  $data : array_fill_keys($fields, '');
 }
 
-function validate($username, $password = null)
+function validate($val1, $val2 = null)
 {
-    if (empty($username) && (is_null($password) || empty($password))) {
+    if (empty($val1) && (is_null($val2) || empty($val2))) {
         return "blank";
     }
 }
