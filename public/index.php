@@ -44,17 +44,20 @@ $results = $stmt->fetchAll();
         <?php include '../templates/header.php'; ?>
         <hr />
         <p>ようこそ、<?php echo $username ?>さん</p>
+        <form>
+        <a class="logOut" href="logOut.php">ログアウト</a>
+        </form>
     </header>
     <main>
         <section class="board">
-            <a href="makeThread.php" class="newThreadLink">新規スレッド作成</a> <!-- 新規スレッド作成ページへのリンク -->
+            <a href="makeThread.php" class="newThreadLink">新規スレッド作成</a>
             <ul>
                 <?php foreach ($results as $result) : ?>
                     <li>
-                        <h2><a href="#"><?php echo $result['title']; ?></a></h2>
+                        <h2><a href="thread.php?id=<?php echo $result['id']; ?>"><?php echo $result['title']; ?></a></h2>
                         <!--substrを使うと中途半端な文字を切り取るので、文字化けを起こす -->
                         <p class="content"><?php echo mb_substr($result['content'], 0, 90); ?></p>
-                        <p>作成日時: <?php echo $result['created_at']; ?></p>
+                        <p>作成日時: <?php echo $result['created_at']; ?></p><span>作成者:<?php echo $result['username']; ?></span>
                     </li>
                 <?php endforeach; ?>
             </ul>

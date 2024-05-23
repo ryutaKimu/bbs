@@ -14,7 +14,6 @@ $content = $_SESSION['form']['content'];
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    // DBへの挿入処理
     $dbh = dbConnect();
     $image_path = isset($_FILES['image']) ? "images/" . uniqid() . "_" . $_FILES['image']['name'] : null;
     $query = "INSERT INTO threads(title,user_id,created_at)VALUES(:title,:user_id,NOW())";
@@ -34,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $result = $insert->execute();
     if ($result) {
-        // フォームデータを更新
         $_SESSION['form']['id'] = $id;
         $_SESSION['form']['username'] = $username;
         header('Location:index.php');

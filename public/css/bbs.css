@@ -39,9 +39,9 @@ h2 {
 }
 
 h2 a {
-  color: #333; /* タイトルのテキスト色を設定 */
-  text-decoration: none; /* 下線を削除 */
-  font-weight: bold; /* 太字にする */
+  color: #333; 
+  text-decoration: none; 
+  font-weight: bold; 
 }
 
 p{
@@ -55,8 +55,8 @@ p.content {
 }
 
 p.create {
-  color: #999; /* 日時のテキスト色を設定 */
-  font-size: 0.8em; /* フォントサイズを小さくする */
+  color: #999; 
+  font-size: 0.8em; 
   margin-bottom: 10px;
 }
 
@@ -65,7 +65,7 @@ p.create {
   display: block;
   text-decoration: none;
   color: #333;
-  font-weight: bold; /* リンクを太字にする */
+  font-weight: bold;
   text-align: left;
   top: 16%;
 }
@@ -74,7 +74,29 @@ a:hover {
   color: #666;
 }
 
-/* レスポンシブデザイン */
+.logOut{
+  position: absolute;
+  display: block;
+  max-width: 70%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  top: 0%;
+  right: 2%;
+  text-decoration: none;
+  text-decoration-line: none;
+}
+
+.logOut:hover{
+  background-color: #0056b3;
+  color: #fff;
+}
+
+
 @media (max-width: 1000px) {
   .board {
     max-width: 90%;

@@ -2,7 +2,7 @@
 session_start();
 require('../config/library.php');
 
-// セッションからユーザー情報を取得
+
 if(isset($_SESSION['form'])){
     $username = $_SESSION['form']['username'];
     $id = $_SESSION['form']['id'];
@@ -11,24 +11,21 @@ if(isset($_SESSION['form'])){
     exit();
 }
 
-// フォームのデフォルト値
 $form = [
     'title' => "",
     'content' => "",
 ];
 $error = [];
 
-// フォームが送信された場合
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    // フォームデータを取得
+
     $fields = ['title', 'content'];
     $postData = getFilteringPostData($fields);
 
-    // バリデーションチェック
     if (validate($postData['title']) === "blank" || validate($postData['content']) === "blank") {
         $error['post'] = "blank";
     } else {
-        // エラーがない場合、フォームデータをセッションに保存してリダイレクト
         $form = $postData;
         $_SESSION['form'] = $form;
         $_SESSION['form']['username'] = $username;

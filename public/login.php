@@ -23,13 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $error['login'] = "missMatch";
     }
 
-    // 認証成功の場合はセッションを設定し、リダイレクト
+
     if ($authenticationResult !== "missMatch" && isset($authenticationResult['id'])) {
         $_SESSION['form']['username'] = $postData['username'];
         $_SESSION['form']['id'] = $authenticationResult['id'];
         var_dump($_SESSION['form']['id']);
         header('Location:index.php');
-        exit(); // リダイレクト後にスクリプトを停止するために exit() を使用
+        exit();
     }
 
 
