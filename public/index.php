@@ -4,6 +4,7 @@ session_start();
 
 $username = $_SESSION['form']['username'];
 $id = $_SESSION['form']['id'];
+var_dump($id);
 
 if($username === null || $id === null){
     header('Location:login.php');
