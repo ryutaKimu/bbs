@@ -3,8 +3,7 @@ require("../config/library.php");
 session_start();
 
 $username = $_SESSION['form']['username'];
-$id = $_SESSION['form']['id'];
-var_dump($id);
+$id = $_SESSION['form']['user_id'];
 
 if($username === null || $id === null){
     header('Location:login.php');
@@ -20,8 +19,17 @@ if (isset($username) && empty($username) && isset($id) && empty($id)){
 
 
 $dbh = dbConnect();
-$selectQuery = "select t.id,t.title,t.created_at,p.content,p.image_path,u.username
-from threads t inner join posts p on t.id = p.thread_id inner join users u on t.user_id = u.id order by t.id desc";
+$selectQuery = "SELECT t.id, t.title, t.created_at, 
+(SELECT p.content 
+ FROM posts p 
+ WHERE p.thread_id = t.id 
+ ORDER BY p.created_at ASC 
+ LIMIT 1) AS content, 
+u.username
+FROM threads t 
+INNER JOIN users u ON t.user_id = u.id 
+ORDER BY t.id DESC 
+";
 $stmt = $dbh->prepare($selectQuery);
 $stmt->execute();
 $results = $stmt->fetchAll();

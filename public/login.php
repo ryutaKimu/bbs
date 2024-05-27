@@ -26,8 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if ($authenticationResult !== "missMatch" && isset($authenticationResult['id'])) {
         $_SESSION['form']['username'] = $postData['username'];
-        $_SESSION['form']['id'] = $authenticationResult['id'];
-        var_dump($_SESSION['form']['id']);
+        $_SESSION['form']['user_id'] = $authenticationResult['id'];
         header('Location:index.php');
         exit();
     }

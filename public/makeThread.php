@@ -5,7 +5,7 @@ require('../config/library.php');
 
 if(isset($_SESSION['form'])){
     $username = $_SESSION['form']['username'];
-    $id = $_SESSION['form']['id'];
+    $id = $_SESSION['form']['user_id'];
 }else{
     header('Location:index.php');
     exit();
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $form = $postData;
         $_SESSION['form'] = $form;
         $_SESSION['form']['username'] = $username;
-        $_SESSION['form']['id'] = $id;
+        $_SESSION['form']['user_id'] = $id;
         header(('Location:CreateThreadCheck.php'));
         exit();
     }

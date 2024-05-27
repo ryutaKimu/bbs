@@ -7,7 +7,7 @@ if (!isset($_SESSION['form']) || empty($_SESSION['form'])) {
     exit();
 }
 
-$id = $_SESSION['form']['id'];
+$id = $_SESSION['form']['user_id'];
 $username = $_SESSION['form']['username'];
 $title = $_SESSION['form']['title'];
 $content = $_SESSION['form']['content'];
