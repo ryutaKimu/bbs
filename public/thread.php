@@ -3,7 +3,6 @@ session_start();
 require('../config/library.php');
 
 
-// セッションチェック
 if ((isset($_SESSION['form']['id']) && !empty($_SESSION['form']['id'])) ||
     (isset($_SESSION['form']['username']) && !empty($_SESSION['form']['username']))
 ) {
@@ -14,7 +13,6 @@ if ((isset($_SESSION['form']['id']) && !empty($_SESSION['form']['id'])) ||
 }
 
 
-// GETリクエストでIDを取得
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $thread_id = $_GET['id'];
     $_SESSION['id'] = $thread_id;
@@ -144,7 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 </li>
             </ul>
         </div>
-        <!-- コメント投稿フォーム -->
         <div class="postForm">
             <form action="thread.php?id=<?php echo $thread_id ?>" method="POST">
                 <input type="hidden" name="id" value="<?php if (isset($_SESSION['id']['thread_id'])) echo $_SESSION['id']; ?>">
